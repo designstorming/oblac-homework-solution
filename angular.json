@@ -56,7 +56,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/homework-app/src/environments/environment.ts",
+                  "with": "projects/homework-app/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -68,7 +74,8 @@
               "browserTarget": "homework-app:build:production"
             },
             "development": {
-              "browserTarget": "homework-app:build:development"
+              "browserTarget": "homework-app:build:development",
+              "proxyConfig": "proxy-conf.json"
             }
           },
           "defaultConfiguration": "development"

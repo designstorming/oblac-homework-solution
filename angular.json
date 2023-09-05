@@ -3,34 +3,34 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "homework": {
+    "homework-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/homework-app",
+      "sourceRoot": "projects/homework-app/src",
       "prefix": "hw",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/homework",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "outputPath": "dist/homework-app",
+            "index": "projects/homework-app/src/index.html",
+            "main": "projects/homework-app/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "projects/homework-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/homework-app/src/favicon.ico",
+              "projects/homework-app/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/homework-app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "homework:build:production"
+              "browserTarget": "homework-app:build:production"
             },
             "development": {
-              "browserTarget": "homework:build:development"
+              "browserTarget": "homework-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "homework:build"
+            "browserTarget": "homework-app:build"
           }
         },
         "test": {
@@ -86,16 +86,49 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "tsconfig.spec.json",
+            "tsConfig": "projects/homework-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/homework-app/src/favicon.ico",
+              "projects/homework-app/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/homework-app/src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "homework-lib": {
+      "projectType": "library",
+      "root": "projects/homework-lib",
+      "sourceRoot": "projects/homework-lib/src",
+      "prefix": "hw",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/homework-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/homework-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/homework-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/homework-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

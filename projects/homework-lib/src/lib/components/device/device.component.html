@@ -1,0 +1,10 @@
+<button
+  *ngIf="device$ | async as device"
+  (click)="handleActivate(device.id)"
+  type="button"
+  class="list-group-item justify-content-between list-group-item-action align-items-start">
+  <div class="ms-2 me-auto">
+    <div class="fw-bold">{{device.name}}</div>
+    {{ device.id }}
+  </div>
+</button>

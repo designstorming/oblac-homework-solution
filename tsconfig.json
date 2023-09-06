@@ -8,9 +8,13 @@
     "strict": true,
     "noImplicitOverride": true,
     "paths": {
-      "homework-lib": [
+      "@homework-lib": [
         "dist/homework-lib",
         "projects/homework-lib/src/lib",
+      ],
+      "@homework-lib/*": [
+        "dist/homework-lib/*",
+        "projects/homework-lib/src/lib/*",
       ]
     },
     "noPropertyAccessFromIndexSignature": true,

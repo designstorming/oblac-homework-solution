@@ -1,0 +1,18 @@
+.popover {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 4px -2px black;
+  overflow: auto;
+  max-height: 25rem;
+  min-width: 5rem;
+  max-width: 25rem;
+
+  p {
+    margin: 0;
+
+    + p {
+      margin-top: 1rem;
+    }
+  }
+}

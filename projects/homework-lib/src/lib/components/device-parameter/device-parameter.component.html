@@ -1,0 +1,44 @@
+<label [for]="id" class="form-label">{{ label }}</label>
+<div class="input-group" [class.has-validation]="true" [class.was-validated]="!input.valid">
+  <input
+    type="number"
+    [id]="id"
+    [name]="id"
+    [(ngModel)]="value"
+    [disabled]="isDisabled"
+    [required]="params.mandatory"
+    #input="ngModel"
+    [min]="params.min"
+    [max]="params.max"
+    class="form-control">
+  <span *ngIf="params.unit" class="input-group-text">{{ params.unit }}</span>
+
+  <ng-container *ngIf="params.description">
+    <button
+      cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin"
+      (click)="showDesc = !showDesc"
+      aria-label="Field description"
+      class="btn btn-outline-secondary"><i class="bi-info-circle-fill me-1"></i></button>
+
+    <ng-template
+      #overlayRef
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="showDesc">
+        <div [innerHtml]="description" class="popover"></div>
+    </ng-template>
+  </ng-container>
+
+  <button
+    class="btn btn-secondary"
+    [disabled]="isDisabled || !input.valid"
+    (click)="handleUpdate(params.id)">Update</button>
+
+  <div
+    *ngIf="!input.valid && input.dirty"
+    class="invalid-feedback">
+      <i class="bi-exclamation-triangle-fill me-1"></i>
+      Value should be in range of {{params.min}}-{{params.max}}
+  </div>
+</div>

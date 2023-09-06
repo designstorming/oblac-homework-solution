@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Device, DeviceParameter } from '../models/device.model';
 
 export const deviceApi = {
@@ -7,14 +8,14 @@ export const deviceApi = {
   device: (id: Device['id']) => `/devices/${id}`,
   deviceParameters: (id: Device['id']) => `/devices/${id}/parameters`,
   parameters: `/device-parameters`,
-  parameter: (id: DeviceParameter['id']) => `/device-parameters/${id}`,
+  parameter: (id: DeviceParameter['id'] | string) => `/device-parameters/${id}`,
   torque: (id: Device['id']) => `/device/${id}/cogging-torque-data`,
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeviceServiceTsService {
+export class DeviceService {
 
   getDevices() {
     return this.http.get<Device[]>(deviceApi.devices);
@@ -47,7 +48,8 @@ export class DeviceServiceTsService {
   }
 
   updateParameterValue(id: DeviceParameter['id'], data: Pick<DeviceParameter, 'value'>) {
-    return this.http.patch<Pick<DeviceParameter, 'value'>>(deviceApi.parameters, { data });
+    const encodedId = encodeURIComponent(id);
+    return this.http.patch<Pick<DeviceParameter, 'value'>>(deviceApi.parameter(encodedId), data);
   }
 
   getTorqueData(id: Device['id']) {

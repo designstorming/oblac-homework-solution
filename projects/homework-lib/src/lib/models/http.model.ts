@@ -1,7 +1,12 @@
+export interface ErrorResponse {
+  status: number,
+  message: string;
+}
+
 
 /* NOT USED CURRENTLY */
 
-export const Sort = {
+/* export const Sort = {
   ASC: 'asc',
   DESC: 'desc'
 } as const;
@@ -22,4 +27,5 @@ export const initialRequestParams: RequestParams = {
   perPage: 20,
   page: 1,
   search: ''
-}
+} */
+

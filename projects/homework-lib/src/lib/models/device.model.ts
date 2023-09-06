@@ -2,6 +2,14 @@ export type DeviceSN = `${number}-${number}-${number}-${number}`;
 export type DeviceMacAddress = `${string}:${string}:${string}:${string}:${string}:${string}`;
 export type ComponentVersion = `${string}.${number}`
 
+export const Access = {
+  RO: 'ro',
+  WO: 'wo',
+  RW: 'rw'
+} as const;
+
+export type AccessType = (typeof Access)[keyof typeof Access];
+
 export interface DeviceComponents {
   name: string;
   serialNumber: DeviceSN;
@@ -29,10 +37,10 @@ export interface Device {
 }
 
 export interface DeviceParameter {
-  id: `${string}x${string}:${string}.${string}-${string}-${string}-${string}`;
+  id: `${number}x${number}:${number}.${number}-${number}-${number}-${number}`;
   deviceId: DeviceSN;
   index: number;
-  subIndex: number;
+  subindex: number;
   name: string;
   type: Uppercase<string>
   min: number;
@@ -40,7 +48,7 @@ export interface DeviceParameter {
   value: number;
   unit: string;
   mandatory: boolean;
-  access: string;
+  access: AccessType;
   options: {};
   description: string;
 }
